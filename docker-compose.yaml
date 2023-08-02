@@ -1,0 +1,38 @@
+version: "3.8"
+services:
+
+# Lorsque le fichier Docker compose va démarrer le conteneur, 😀
+# le fichier Docker File sera automatiquement utilisé pour la configuration 😀
+  app:
+    build: .
+    command: python -u app.py
+    ports:
+      - "5000:5000"
+      
+    # le "." représente le répertoire sur lequel nous sommnes 😀
+    # Le chemin du répertoire est dans le conteneur 😀
+    volumes:
+      - .:/app
+    links:
+      - db
+    
+    # Le db est la configuration du conteneur de la base de données. 😀
+  db:
+    image: mongo:latest 
+    hostname: test_mongodb 
+    environment:
+      - MONGO_INITDB_DATABASE=animal_db
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=pass
+    # les variables d'envorionnements sont configurées dans le fichier Dockerfile 😀
+    # ce qui permettra à l'application Node de les utiliser se connecter à la base de données 😀
+
+    # Lorsque le conteneur MongoDB va daémarrer, 😀
+    # le script va se lancer dans le répertoire du conteneur 'docker-entrypoint-initdb.d' 😀
+    # qui va se connecter au fichier de départ. 😀
+    volumes:
+      - ./init-db.js:/docker-entrypoint-initdb.d/init-db.js:ro
+
+    # Le port correspond à la base de donnée MongoDB 😀
+    ports: 
+      - 27017:27017

@@ -1,0 +1,12 @@
+FROM python:3.9-slim
+
+WORKDIR /db
+
+ENV MONGO_INITDB_DATABASE="animal_db"
+ENV MONGO_INITDB_ROOT_USERNAME="root"
+ENV ONGO_INITDB_ROOT_PASSWORD="pass"
+
+COPY app.py .
+COPY requirements-db.txt .
+
+RUN pip install -r requirements-db.txt
