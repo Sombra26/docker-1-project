@@ -48,7 +48,8 @@ services:
 - Vérification de la commande README.md permettant de bâtir l'image et d'accéder à l'application de l'URL http://localhost:5000/animals
 
 ```
-![Alt text](image.png)
+![image](https://github.com/Sombra26/docker-1-project-part-2/assets/108517832/436e7862-91c9-4d36-8fb1-e240930cbc25)
+
 ```
 
 ### 4
